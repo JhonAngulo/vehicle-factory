@@ -9,27 +9,24 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 
-
-export default function VehicleForm({ open, handleToggleOpen, data = {} }) {
+export default function OrderForm({ open, handleToggleOpen }) {
   const router = useRouter();
-  const { id, mark, manufacturing_time } = data
-  console.log(id, mark, manufacturing_time)
-
-  const formEl = useRef(null)
+  const formEl = useRef()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
     const formData = new FormData(formEl.current)
-    const newVehicle = {
-      mark: formData.get('mark'),
-      manufacturing_time: formData.get('manufacturing_time'),
+    const newOrder = {
+      client: formData.get('client'),
+      order: formData.get('order'),
+      date: formData.get('date'),
     }
 
     try {
-      const response = await fetch(`http://localhost:9000/vehicle/${id ? id : ''}`,
+      const response = await fetch('http://localhost:9000/order',
         {
-          method: id ? 'PUT' : 'POST',
-          body: JSON.stringify(newVehicle),
+          method: 'POST',
+          body: JSON.stringify(newOrder),
           headers: {
             'Content-Type': 'application/json'
           }
@@ -37,8 +34,8 @@ export default function VehicleForm({ open, handleToggleOpen, data = {} }) {
       )
       const val = await response.json()
       if (val.status === 201) {
-        router.replace(router.asPath)
         console.log(val.message)
+        router.replace(router.asPath)
       }
     } catch (error) {
       console.log('Falla al registrar el nuevo vehiculo')
@@ -47,20 +44,24 @@ export default function VehicleForm({ open, handleToggleOpen, data = {} }) {
     handleToggleOpen()
   };
 
+  let date = new Date()
+  let year = date.getFullYear()
+  let mount = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}`: date.getMonth() + 1
+  let today = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
+
   return (
-    <Dialog open={open} onClose={handleToggleOpen} aria-labelledby={`form-dialog-${id}`}>
-      <DialogTitle id={`form-dialog-${id}`}>Crear Vehiculo</DialogTitle>
+    <Dialog open={open} onClose={handleToggleOpen} aria-labelledby="form-dialog-title">
+      <DialogTitle id="form-dialog-title">Crear Orden</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          por favor ingresa los datos del automotor y luego has click en "GUARDAR".
+          por favor ingresa los datos de la orden y luego has click en "GUARDAR".
           </DialogContentText>
         <form ref={formEl}>
           <TextField
             autoFocus
             margin="dense"
-            name="mark"
-            label="Marca"
-            defaultValue={mark}
+            name="client"
+            label="Cliente"
             type="text"
             required
             fullWidth
@@ -70,11 +71,22 @@ export default function VehicleForm({ open, handleToggleOpen, data = {} }) {
           <TextField
             autoFocus
             margin="dense"
-            name="manufacturing_time"
-            label="Tiempo de fabricación"
-            defaultValue={manufacturing_time}
-            type="number"
-            InputProps={{ inputProps: { min: 1 } }}
+            name="order"
+            label="Vehiculo"
+            type="text"
+            required
+            fullWidth
+          />
+          <br></br>
+          <br></br>
+          <TextField
+            name="date"
+            label="Fecha"
+            type="date"
+            defaultValue={`${year}-${mount}-${today}`}
+            InputLabelProps={{
+              shrink: true,
+            }}
             required
             fullWidth
           />

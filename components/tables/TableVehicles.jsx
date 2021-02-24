@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -13,13 +12,10 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import DeleteIcon from '@material-ui/icons/Delete';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
-import FilterListIcon from '@material-ui/icons/FilterList';
 import { visuallyHidden } from '@material-ui/utils';
+import DeleteVehicle from '../dialog/DeleteVehicle'
 
 
 function descendingComparator(a, b, orderBy) {
@@ -87,11 +83,8 @@ const useStyles = makeStyles((theme) => ({
 function EnhancedTableHead(props) {
   const {
     classes,
-    onSelectAllClick,
     order,
     orderBy,
-    numSelected,
-    rowCount,
     onRequestSort,
   } = props;
   const createSortHandler = (property) => (event) => {
@@ -162,7 +155,6 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
-  const { numSelected } = props;
 
   return (
     <Toolbar>
@@ -184,7 +176,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-const TableVehicles = ({ data }) => {
+const TableVehicles = ({ data, edit }) => {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -192,7 +184,7 @@ const TableVehicles = ({ data }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const handleRequestSort = (event, property) => {
+  const handleRequestSort = (_event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
@@ -207,7 +199,7 @@ const TableVehicles = ({ data }) => {
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
+  const handleClick = (_event, name) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
 
@@ -227,7 +219,7 @@ const TableVehicles = ({ data }) => {
     setSelected(newSelected);
   };
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (_event, newPage) => {
     setPage(newPage);
   };
 
@@ -236,9 +228,6 @@ const TableVehicles = ({ data }) => {
     setPage(0);
   };
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
-
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
 
@@ -290,12 +279,16 @@ const TableVehicles = ({ data }) => {
                       <TableCell align="center">{data.mark}</TableCell>
                       <TableCell align="center">{data.manufacturing_time}</TableCell>
                       <TableCell >
-                        <IconButton color="primary" aria-label="editar" component="span" size='small'>
+                        <IconButton
+                          color="primary"
+                          aria-label="editar"
+                          component="span"
+                          size='small'
+                          onClick={() => edit(data)}
+                        >
                           <SettingsApplicationsIcon />
                         </IconButton>
-                        <IconButton color="secondary" aria-label="eliminar" component="span" size='small'>
-                          <DeleteIcon />
-                        </IconButton>
+                        <DeleteVehicle id={data.id}/>
                       </TableCell>
                     </TableRow>
                   );
@@ -319,7 +312,7 @@ const TableVehicles = ({ data }) => {
           rowsPerPage={rowsPerPage}
           page={page}
           labelRowsPerPage='Registros por página'
-          labelDisplayedRows={({ from, to, count }) => `del ${from} al ${to}, página ${page + 1}`}
+          labelDisplayedRows={({ from, to, page, count }) => `${from} a ${to} de ${count}, página ${page + 1}`}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
