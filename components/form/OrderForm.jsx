@@ -1,16 +1,15 @@
-import React, { useRef } from 'react';
-import { useRouter } from 'next/router';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import React, { useRef } from 'react'
+import { useRouter } from 'next/router'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
 
-
-export default function OrderForm({ open, handleToggleOpen }) {
-  const router = useRouter();
+export default function OrderForm ({ open, handleToggleOpen }) {
+  const router = useRouter()
   const formEl = useRef()
 
   const handleSubmit = async (event) => {
@@ -19,7 +18,7 @@ export default function OrderForm({ open, handleToggleOpen }) {
     const newOrder = {
       client: formData.get('client'),
       order: formData.get('order'),
-      date: formData.get('date'),
+      date: formData.get('date')
     }
 
     try {
@@ -42,20 +41,20 @@ export default function OrderForm({ open, handleToggleOpen }) {
     }
 
     handleToggleOpen()
-  };
+  }
 
-  let date = new Date()
-  let year = date.getFullYear()
-  let mount = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}`: date.getMonth() + 1
-  let today = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
+  const date = new Date()
+  const year = date.getFullYear()
+  const mount = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
+  const today = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
 
   return (
     <Dialog open={open} onClose={handleToggleOpen} aria-labelledby="form-dialog-title">
       <DialogTitle id="form-dialog-title">Crear Orden</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          por favor ingresa los datos de la orden y luego has click en "GUARDAR".
-          </DialogContentText>
+        {'por favor ingresa los datos de la orden y luego has click en "GUARDAR".'}
+        </DialogContentText>
         <form ref={formEl}>
           <TextField
             autoFocus
@@ -85,7 +84,7 @@ export default function OrderForm({ open, handleToggleOpen }) {
             type="date"
             defaultValue={`${year}-${mount}-${today}`}
             InputLabelProps={{
-              shrink: true,
+              shrink: true
             }}
             required
             fullWidth
@@ -101,5 +100,5 @@ export default function OrderForm({ open, handleToggleOpen }) {
           </Button>
       </DialogActions>
     </Dialog>
-  );
+  )
 }

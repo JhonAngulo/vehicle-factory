@@ -1,27 +1,27 @@
-import * as React from 'react';
-import { useRouter } from 'next/router';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
+import * as React from 'react'
+import { useRouter } from 'next/router'
+import Button from '@material-ui/core/Button'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import IconButton from '@material-ui/core/IconButton'
+import DeleteIcon from '@material-ui/icons/Delete'
 
-export default function DeleteVehicle({ id }) {
-  const router = useRouter();
-  const [open, setOpen] = React.useState(false);
+export default function DeleteVehicle ({ id }) {
+  const router = useRouter()
+  const [open, setOpen] = React.useState(false)
 
   const handleToggleOpenDialog = () => {
-    setOpen(!open);
-  };
+    setOpen(!open)
+  }
 
   const handleDelete = async () => {
     try {
       const response = await fetch(`${process.env.apiUrl}/vehicle/${id}`,
         {
-          method: 'DELETE',
+          method: 'DELETE'
         }
       )
       const val = await response.json()
@@ -32,8 +32,8 @@ export default function DeleteVehicle({ id }) {
     } catch (error) {
       console.log(error)
     }
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   return (
     <>
@@ -47,7 +47,7 @@ export default function DeleteVehicle({ id }) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Estas seguro ?"}
+          {'Estas seguro ?'}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -62,5 +62,5 @@ export default function DeleteVehicle({ id }) {
         </DialogActions>
       </Dialog>
     </>
-  );
+  )
 }

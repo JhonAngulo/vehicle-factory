@@ -1,58 +1,58 @@
-import * as React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import * as React from 'react'
+import AppBar from '@material-ui/core/AppBar'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import { makeStyles } from '@material-ui/core/styles'
 
 import Sidebar from '../components/Sidebar'
 
-const drawerWidth = 240;
+const drawerWidth = 240
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
+    display: 'flex'
   },
   drawer: {
     [theme.breakpoints.up('md')]: {
       width: drawerWidth,
-      flexShrink: 0,
-    },
+      flexShrink: 0
+    }
   },
   appBar: {
     [theme.breakpoints.up('md')]: {
       width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-    },
+      marginLeft: drawerWidth
+    }
   },
   menuButton: {
     marginRight: theme.spacing(2),
     [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
+      display: 'none'
+    }
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     boxSizing: 'border-box',
-    width: drawerWidth,
+    width: drawerWidth
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-}));
+    padding: theme.spacing(3)
+  }
+}))
 
-function Layout({ window, children }) {
-  const classes = useStyles();
+function Layout ({ window, children }) {
+  const classes = useStyles()
 
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = React.useState(false)
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+    setMobileOpen(!mobileOpen)
+  }
 
   return (
     <div className={classes.root}>
@@ -86,7 +86,7 @@ function Layout({ window, children }) {
         {children}
       </main>
     </div>
-  );
+  )
 }
 
-export default Layout;
+export default Layout

@@ -1,29 +1,27 @@
-import React from 'react';
+import React from 'react'
 import Grid from '@material-ui/core/Grid'
-import Accordion from '@material-ui/core/Accordion';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Accordion from '@material-ui/core/Accordion'
+import AccordionDetails from '@material-ui/core/AccordionDetails'
+import AccordionSummary from '@material-ui/core/AccordionSummary'
+import Typography from '@material-ui/core/Typography'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import CardDetailt from './CardDetailt'
 
 const Schedule = ({ schedule }) => {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(false)
 
   const handleChange = (panel) => (_event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
+    setExpanded(isExpanded ? panel : false)
+  }
 
   const getTime = ({ data }) => {
-
     if (data.length > 0) {
       const time = data.reduce((acc, item) => acc + parseInt(item.manufacturing_time), 0)
       return time
     } else {
       return 0
     }
-
   }
 
   return (
@@ -58,7 +56,7 @@ const Schedule = ({ schedule }) => {
         ))
       }
     </div>
-  );
+  )
 }
 
 export default Schedule

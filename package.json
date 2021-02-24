@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "eslint": "eslint . --fix"
+    "eslint": "eslint . --ext .js,.jsx --fix"
   },
   "dependencies": {
     "@emotion/cache": "^11.1.3",

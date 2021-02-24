@@ -1,47 +1,47 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableFooter from '@material-ui/core/TableFooter';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import LastPageIcon from '@material-ui/icons/LastPage';
+import * as React from 'react'
+import PropTypes from 'prop-types'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableFooter from '@material-ui/core/TableFooter'
+import TablePagination from '@material-ui/core/TablePagination'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
+import IconButton from '@material-ui/core/IconButton'
+import FirstPageIcon from '@material-ui/icons/FirstPage'
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft'
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
+import LastPageIcon from '@material-ui/icons/LastPage'
 
 const useStyles1 = makeStyles((theme) => ({
   root: {
     flexShrink: 0,
-    marginLeft: theme.spacing(2.5),
-  },
-}));
+    marginLeft: theme.spacing(2.5)
+  }
+}))
 
-function TablePaginationActions(props) {
-  const classes = useStyles1();
-  const theme = useTheme();
-  const { count, page, rowsPerPage, onPageChange } = props;
+function TablePaginationActions (props) {
+  const classes = useStyles1()
+  const theme = useTheme()
+  const { count, page, rowsPerPage, onPageChange } = props
 
   const handleFirstPageButtonClick = (event) => {
-    onPageChange(event, 0);
-  };
+    onPageChange(event, 0)
+  }
 
   const handleBackButtonClick = (event) => {
-    onPageChange(event, page - 1);
-  };
+    onPageChange(event, page - 1)
+  }
 
   const handleNextButtonClick = (event) => {
-    onPageChange(event, page + 1);
-  };
+    onPageChange(event, page + 1)
+  }
 
   const handleLastPageButtonClick = (event) => {
-    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-  };
+    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1))
+  }
 
   return (
     <div className={classes.root}>
@@ -74,39 +74,39 @@ function TablePaginationActions(props) {
         {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
       </IconButton>
     </div>
-  );
+  )
 }
 
 TablePaginationActions.propTypes = {
   count: PropTypes.number.isRequired,
   onPageChange: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
-  rowsPerPage: PropTypes.number.isRequired,
-};
+  rowsPerPage: PropTypes.number.isRequired
+}
 
 const useStyles2 = makeStyles({
   table: {
     minWidth: 600
-  },
-});
+  }
+})
 
 const TableVehicles = ({ data }) => {
-  const classes = useStyles2();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const classes = useStyles2()
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(5)
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0
 
   const handleChangePage = (_event, newPage) => {
-    setPage(newPage);
-  };
+    setPage(newPage)
+  }
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+    setRowsPerPage(parseInt(event.target.value, 10))
+    setPage(0)
+  }
 
   return (
     <TableContainer component={Paper}>
@@ -147,9 +147,9 @@ const TableVehicles = ({ data }) => {
               page={page}
               SelectProps={{
                 inputProps: {
-                  'aria-label': 'rows per page',
+                  'aria-label': 'rows per page'
                 },
-                native: true,
+                native: true
               }}
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
@@ -159,8 +159,7 @@ const TableVehicles = ({ data }) => {
         </TableFooter>
       </Table>
     </TableContainer>
-  );
+  )
 }
-
 
 export default TableVehicles

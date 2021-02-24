@@ -1,17 +1,16 @@
-import React, { useRef } from 'react';
-import { useRouter } from 'next/router';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+/* eslint-disable camelcase */
+import React, { useRef } from 'react'
+import { useRouter } from 'next/router'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
 
-
-
-export default function VehicleForm({ open, handleToggleOpen, data = {} }) {
-  const router = useRouter();
+export default function VehicleForm ({ open, handleToggleOpen, data = {} }) {
+  const router = useRouter()
   const { id, mark, manufacturing_time } = data
   const formEl = useRef(null)
 
@@ -20,11 +19,11 @@ export default function VehicleForm({ open, handleToggleOpen, data = {} }) {
     const formData = new FormData(formEl.current)
     const newVehicle = {
       mark: formData.get('mark'),
-      manufacturing_time: formData.get('manufacturing_time'),
+      manufacturing_time: formData.get('manufacturing_time')
     }
 
     try {
-      const response = await fetch(`${process.env.apiUrl}/vehicle/${id ? id : ''}`,
+      const response = await fetch(`${process.env.apiUrl}/vehicle/${id || ''}`,
         {
           method: id ? 'PUT' : 'POST',
           body: JSON.stringify(newVehicle),
@@ -43,14 +42,14 @@ export default function VehicleForm({ open, handleToggleOpen, data = {} }) {
     }
 
     handleToggleOpen()
-  };
+  }
 
   return (
     <Dialog open={open} onClose={handleToggleOpen} aria-labelledby={`form-dialog-${id}`}>
       <DialogTitle id={`form-dialog-${id}`}>Crear Vehiculo</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          por favor ingresa los datos del automotor y luego has click en "GUARDAR".
+          {'por favor ingresa los datos del automotor y luego has click en "GUARDAR".'}
           </DialogContentText>
         <form ref={formEl}>
           <TextField
@@ -87,5 +86,5 @@ export default function VehicleForm({ open, handleToggleOpen, data = {} }) {
           </Button>
       </DialogActions>
     </Dialog>
-  );
+  )
 }

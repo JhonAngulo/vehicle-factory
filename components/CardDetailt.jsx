@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
+import * as React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Card from '@material-ui/core/Card'
+import CardHeader from '@material-ui/core/CardHeader'
+import CardContent from '@material-ui/core/CardContent'
+import Avatar from '@material-ui/core/Avatar'
+import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,20 +21,19 @@ const useStyles = makeStyles((theme) => ({
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
+      duration: theme.transitions.duration.shortest
+    })
   },
   expandOpen: {
-    transform: 'rotate(180deg)',
+    transform: 'rotate(180deg)'
   },
   avatar: {
-    backgroundColor: '#505254',
-  },
-}));
+    backgroundColor: '#505254'
+  }
+}))
 
-export default function CardDetailt({ data }) {
-
-  const classes = useStyles();
+export default function CardDetailt ({ data }) {
+  const classes = useStyles()
 
   return (
     <Card className={classes.root}>
@@ -59,5 +58,5 @@ export default function CardDetailt({ data }) {
       </CardContent>
 
     </Card>
-  );
+  )
 }

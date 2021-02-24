@@ -1,50 +1,50 @@
-import * as React from 'react';
+import * as React from 'react'
 import Link from 'next/link'
-import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider'
+import Drawer from '@material-ui/core/Drawer'
+import Hidden from '@material-ui/core/Hidden'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
 
-import DriveEtaIcon from '@material-ui/icons/DriveEta';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import ListIcon from '@material-ui/icons/List';
+import DriveEtaIcon from '@material-ui/icons/DriveEta'
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
+import ListIcon from '@material-ui/icons/List'
 
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   drawerPaper: ({ drawerWidth }) => ({
     boxSizing: 'border-box',
-    width: drawerWidth,
-  }),
-}));
+    width: drawerWidth
+  })
+}))
 
 const Sidebar = ({ window, mobileOpen, handleDrawerToggle, drawerWidth }) => {
-  const classes = useStyles({ drawerWidth });
-  const theme = useTheme();
+  const classes = useStyles({ drawerWidth })
+  const theme = useTheme()
 
   const menuOptions = [
     {
-      name: "Vehiculos",
+      name: 'Vehiculos',
       icon: <DriveEtaIcon />,
       link: '/'
     },
     {
-      name: "Pedidos",
+      name: 'Pedidos',
       icon: <AddShoppingCartIcon />,
       link: '/orders'
     },
     {
-      name: "Cronograma",
+      name: 'Cronograma',
       icon: <ListIcon />,
       link: '/daily'
     }
   ]
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+  const container = window !== undefined ? () => window().document.body : undefined
 
   const drawer = (
     <div>
@@ -64,7 +64,7 @@ const Sidebar = ({ window, mobileOpen, handleDrawerToggle, drawerWidth }) => {
         ))}
       </List>
     </div>
-  );
+  )
 
   return (
     <>
@@ -76,10 +76,10 @@ const Sidebar = ({ window, mobileOpen, handleDrawerToggle, drawerWidth }) => {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           classes={{
-            paper: classes.drawerPaper,
+            paper: classes.drawerPaper
           }}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true // Better open performance on mobile.
           }}
         >
           {drawer}
@@ -88,7 +88,7 @@ const Sidebar = ({ window, mobileOpen, handleDrawerToggle, drawerWidth }) => {
       <Hidden mdDown implementation="css">
         <Drawer
           classes={{
-            paper: classes.drawerPaper,
+            paper: classes.drawerPaper
           }}
           variant="permanent"
           open
