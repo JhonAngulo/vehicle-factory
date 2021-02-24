@@ -6,7 +6,7 @@ import Schedule from '../components/Schedule'
 const Daily = ({ schedule }) => {
   useEffect(() => {
     // console.log(schedule)
-  },[schedule])
+  }, [schedule])
   return (
     <>
       <Head>
@@ -19,10 +19,9 @@ const Daily = ({ schedule }) => {
 }
 
 Daily.getInitialProps = async () => {
-  const res = await fetch('http://localhost:9000/schedule')
+  const res = await fetch(`${process.env.apiUrl}/schedule`)
   const json = await res.json()
   return { schedule: json.data }
 }
-
 
 export default Daily

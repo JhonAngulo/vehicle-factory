@@ -1,19 +1,18 @@
-import React from 'react';
+import React from 'react'
 import Head from 'next/head'
 import Table from '../components/tables/TableOrders'
 import CardTitle from '../components/CardTitle'
-import IconButton from '@material-ui/core/IconButton';
-import AddIcon from '@material-ui/icons/Add';
+import IconButton from '@material-ui/core/IconButton'
+import AddIcon from '@material-ui/icons/Add'
 
 import OrderForm from '../components/form/OrderForm'
 const Orders = ({ orders }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
 
   const handleToggleOpen = () => {
-    setOpen(!open);
-  };
+    setOpen(!open)
+  }
 
-  
   return (
     <>
       <Head>
@@ -31,7 +30,7 @@ const Orders = ({ orders }) => {
 }
 
 Orders.getInitialProps = async () => {
-  const res = await fetch('http://localhost:9000/order')
+  const res = await fetch(`${process.env.apiUrl}/order`)
   const json = await res.json()
   return { orders: json.data }
 }

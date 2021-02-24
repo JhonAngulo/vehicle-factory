@@ -19,7 +19,7 @@ export default function DeleteVehicle({ id }) {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:9000/vehicle/${id}`,
+      const response = await fetch(`${process.env.apiUrl}/vehicle/${id}`,
         {
           method: 'DELETE',
         }

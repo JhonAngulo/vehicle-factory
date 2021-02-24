@@ -1,14 +1,14 @@
-import * as React from 'react';
-import Document, { Html, Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheets } from '@material-ui/core/styles';
-import createEmotionServer from '@emotion/server/create-instance';
-import theme from '../src/theme';
-import { cache } from './_app.js';
+import * as React from 'react'
+import Document, { Html, Head, Main, NextScript } from 'next/document'
+import { ServerStyleSheets } from '@material-ui/core/styles'
+import createEmotionServer from '@emotion/server/create-instance'
+import theme from '../src/theme'
+import { cache } from './_app.js'
 
-const { extractCritical } = createEmotionServer(cache);
+const { extractCritical } = createEmotionServer(cache)
 
 export default class MyDocument extends Document {
-  render() {
+  render () {
     return (
       <Html lang="es">
         <Head>
@@ -23,22 +23,21 @@ export default class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    );
+    )
   }
 }
 
 MyDocument.getInitialProps = async (ctx) => {
-
-  const sheets = new ServerStyleSheets();
-  const originalRenderPage = ctx.renderPage;
+  const sheets = new ServerStyleSheets()
+  const originalRenderPage = ctx.renderPage
 
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
-    });
+      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />)
+    })
 
-  const initialProps = await Document.getInitialProps(ctx);
-  const styles = extractCritical(initialProps.html);
+  const initialProps = await Document.getInitialProps(ctx)
+  const styles = extractCritical(initialProps.html)
 
   return {
     ...initialProps,
@@ -49,7 +48,7 @@ MyDocument.getInitialProps = async (ctx) => {
         key="emotion-style-tag"
         data-emotion={`css ${styles.ids.join(' ')}`}
         dangerouslySetInnerHTML={{ __html: styles.css }}
-      />,
-    ],
-  };
-};
+      />
+    ]
+  }
+}

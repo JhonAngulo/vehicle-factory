@@ -23,7 +23,7 @@ export default function OrderForm({ open, handleToggleOpen }) {
     }
 
     try {
-      const response = await fetch('http://localhost:9000/order',
+      const response = await fetch(`${process.env.apiUrl}/order`,
         {
           method: 'POST',
           body: JSON.stringify(newOrder),

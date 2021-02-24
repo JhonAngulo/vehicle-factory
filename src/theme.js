@@ -1,43 +1,43 @@
-import { createMuiTheme } from '@material-ui/core/styles';
-import {grey, indigo, pink, red, orange, blue, green} from '@material-ui/core/colors';
+import { createMuiTheme } from '@material-ui/core/styles'
+import { grey, indigo, pink, red, orange, blue, green } from '@material-ui/core/colors'
 
 // Create a theme instance.
 const theme = createMuiTheme({
   palette: {
-    primary : {
+    primary: {
       light: indigo[300],
       main: indigo[500],
-      dark: indigo[700],
+      dark: indigo[700]
     },
-    secondary : {
+    secondary: {
       light: pink.A200,
       main: pink.A400,
-      dark: pink.A700,
+      dark: pink.A700
     },
-    error : {
+    error: {
       light: red[300],
       main: red[500],
-      dark: red[700],
+      dark: red[700]
     },
-    warning : {
+    warning: {
       light: orange[300],
       main: orange[500],
-      dark: orange[700],
+      dark: orange[700]
     },
-    info :{
+    info: {
       light: blue[300],
       main: blue[500],
-      dark: blue[700],
+      dark: blue[700]
     },
-    success : {
+    success: {
       light: green[300],
       main: green[500],
-      dark: green[700],
+      dark: green[700]
     },
     background: {
-      default: grey[200],
-    },
-  },
-});
+      default: grey[200]
+    }
+  }
+})
 
-export default theme;
+export default theme

@@ -13,8 +13,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 export default function VehicleForm({ open, handleToggleOpen, data = {} }) {
   const router = useRouter();
   const { id, mark, manufacturing_time } = data
-  console.log(id, mark, manufacturing_time)
-
   const formEl = useRef(null)
 
   const handleSubmit = async (event) => {
@@ -26,7 +24,7 @@ export default function VehicleForm({ open, handleToggleOpen, data = {} }) {
     }
 
     try {
-      const response = await fetch(`http://localhost:9000/vehicle/${id ? id : ''}`,
+      const response = await fetch(`${process.env.apiUrl}/vehicle/${id ? id : ''}`,
         {
           method: id ? 'PUT' : 'POST',
           body: JSON.stringify(newVehicle),
