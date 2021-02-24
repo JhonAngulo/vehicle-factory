@@ -45,7 +45,7 @@ const Schedule = ({ schedule }) => {
               <Grid container spacing={3} justifyContent='space-around'>
                 {
                   data.map((item, index) => (
-                    <Grid item xs={3} key={index}>
+                    <Grid item xs={6} sm={6} md={4} lg={3} key={index}>
                       <CardDetailt data={item} />
                     </Grid>
                   ))

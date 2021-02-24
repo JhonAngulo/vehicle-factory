@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2)
   },
   table: {
-    minWidth: 750
+    minWidth: 400
   },
   // TODO fix #20379.
   sortSpan: visuallyHidden
@@ -311,7 +311,7 @@ const TableVehicles = ({ data, edit }) => {
           count={data.length}
           rowsPerPage={rowsPerPage}
           page={page}
-          labelRowsPerPage='Registros por página'
+          labelRowsPerPage='Ver por página'
           labelDisplayedRows={({ from, to, page, count }) => `${from} a ${to} de ${count}, página ${page + 1}`}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
