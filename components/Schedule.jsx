@@ -15,19 +15,10 @@ const Schedule = ({ schedule }) => {
     setExpanded(isExpanded ? panel : false)
   }
 
-  const getTime = ({ data }) => {
-    if (data.length > 0) {
-      const time = data.reduce((acc, item) => acc + parseInt(item.manufacturing_time), 0)
-      return time
-    } else {
-      return 0
-    }
-  }
-
   return (
     <div>
       {
-        schedule.map(({ day, id, data }) => (
+        schedule.map(({ day, id, data, hours }) => (
           <Accordion key={id} expanded={expanded === `panel${id}`} onChange={handleChange(`panel${id}`)}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -38,7 +29,7 @@ const Schedule = ({ schedule }) => {
                 {day}
               </Typography>
               <Typography sx={{ color: 'text.secondary' }}>
-                {`Automoviles a fabricar: ${data.length}, horas estimadas: ${getTime({ data })}`}
+                {`Automoviles a fabricar: ${data.length}, horas estimadas: ${hours}`}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
