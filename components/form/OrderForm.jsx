@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -7,10 +7,23 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
+import { Select, MenuItem, InputLabel, FormControl } from '@material-ui/core'
 
-export default function OrderForm ({ open, handleToggleOpen }) {
+export default function OrderForm ({ open, handleToggleOpen, vehicles }) {
   const router = useRouter()
   const formEl = useRef()
+
+  const [order, setOrder] = useState('')
+
+  const handleChange = (event) => {
+    setOrder(event.target.value)
+  }
+
+  useEffect(() => {
+    if (open) {
+      setOrder('')
+    }
+  }, [open])
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -53,7 +66,7 @@ export default function OrderForm ({ open, handleToggleOpen }) {
       <DialogTitle id="form-dialog-title">Crear Orden</DialogTitle>
       <DialogContent>
         <DialogContentText>
-        {'por favor ingresa los datos de la orden y luego has click en "GUARDAR".'}
+          {'por favor ingresa los datos de la orden y luego has click en "GUARDAR".'}
         </DialogContentText>
         <form ref={formEl}>
           <TextField
@@ -67,15 +80,24 @@ export default function OrderForm ({ open, handleToggleOpen }) {
           />
           <br></br>
           <br></br>
-          <TextField
-            autoFocus
-            margin="dense"
-            name="order"
-            label="Vehiculo"
-            type="text"
-            required
-            fullWidth
-          />
+          <FormControl fullWidth>
+            <InputLabel id="order-select-label">Seleciona tu orden</InputLabel>
+            <Select
+              labelId="order-select-label"
+              id="order-select"
+              name="order"
+              value={order}
+              onChange={handleChange}
+              fullWidth
+            >
+              {
+                vehicles.map((item) => (
+                  <MenuItem key={item.id} value={item.mark}>{item.mark}</MenuItem>
+                ))
+              }
+            </Select>
+          </FormControl>
+          <br></br>
           <br></br>
           <br></br>
           <TextField
